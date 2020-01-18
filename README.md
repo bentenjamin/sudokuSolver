@@ -6,3 +6,5 @@ Had a challenge with some friends to write a 9x9 sudoku solver in pure c with no
 usage:
 gcc *.c -o sudoku
 ./sudoku line0 line1 line2 line3 line4 line5 line6 line7 line8
+
+eg ./sudoku "9...7...." "2...9..53" ".6..124.." "84...1.9." "5.....8.." ".31..4..." "..37..68." ".9..5.741" "47......."
