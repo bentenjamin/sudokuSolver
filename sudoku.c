@@ -89,7 +89,14 @@ void	brute(int grid[9][9], int x, int y)
 		grid[x][y] = 0;
 	}
 	else
+	{
+		if ((x == 8) && (y == 8))
+		{
+			putgrid(grid);
+			exit(1);
+		}
 		brute(grid, (x == 8) ? 0 : x + 1, (x == 8) ? y + 1 : y);
+	}
 	return ;
 }
 
