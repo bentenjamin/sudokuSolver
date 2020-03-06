@@ -82,25 +82,29 @@ int		putgrid(int grid[9][9])
 	return (1);
 }
 
-void	brute(int grid[9][9], int x, int y)
+int		brute(int grid[9][9], int x, int y)
 {
+	if (grid[x][y])
+		return ((x == 8) ? ((y == 8) ? 1 : brute(grid, 0, y + 1)) : brute(grid, x + 1, y));
+
+
 	if (grid[x][y] == 0)
 	{
 		while ((++(grid[x][y])) <= 9)
 			if(check(grid, x, y))
 			{
 				if ((x == 8) && (y == 8))
-					exit(putgrid(grid));
+					return (1);
 				else
-					(x == 8) ? brute(grid, 0, y + 1) : brute(grid, x + 1, y);
+					return ((x == 8) ? brute(grid, 0, y + 1) : brute(grid, x + 1, y));
 			}
 		grid[x][y] = 0;
 	}
 	else if ((x == 8) && (y == 8))
-		exit(putgrid(grid));
+		return (1);
 	else
-		(x == 8) ? brute(grid, 0, y + 1) : brute(grid, x + 1, y);
-	return ;
+		return ((x == 8) ? brute(grid, 0, y + 1) : brute(grid, x + 1, y));
+	return (0);
 }
 
 int		main(int argc, char **argv)
@@ -109,7 +113,9 @@ int		main(int argc, char **argv)
 
 	if (!validin(argc, ++argv) || !popgrid(grid, argv))
 		erexit("error invalid input");
-	brute(grid, 0, 0);
-	erexit("invalid grid");
+	if (brute(grid, 0, 0))
+		putgrid(grid);
+	else
+		ft_putendl("invalid grid");
 	return (0);
 }
