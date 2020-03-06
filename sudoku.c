@@ -90,8 +90,8 @@ int		putgrid(int grid[9][9])
 			ft_putstr("╠═══════╬═══════╬═══════╣\n");
 		i++;
 	}
-	ft_putstr("╚═══════╩═══════╩═══════╝");
-	usleep(10000);
+	ft_putstr("╚═══════╩═══════╩═══════╝\n");
+	usleep(1000);
 	return (1);
 }
 
@@ -115,6 +115,6 @@ int		main(int argc, char **argv)
 	if (!validin(argc, ++argv))
 		erexit("error invalid input");
 	if (!popgrid(grid, argv) || !brute(grid, 0, 0))
-		ft_putendl("invalid grid");
+		erexit("invalid grid");
 	return (putgrid(grid));
 }
