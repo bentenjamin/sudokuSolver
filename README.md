@@ -11,4 +11,7 @@ gcc *.c -o sudoku
 
 eg ./sudoku "9...7...." "2...9..53" ".6..124.." "84...1.9." "5.....8.." ".31..4..." "..37..68." ".9..5.741" "47......."
 
+a bit of a harder one:
+./sudoku ".63......" "...2.8..1" ".....9.52" "8..6....." "59......." ".......75" "....7..4." ".3....91." ".57.3...."
+
 this one has a pretty visualiser but i was just too lazy to norme (School 42's standard for c) it.
