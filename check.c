@@ -15,7 +15,7 @@
 int		cx(int grid[9][9], int x, int y)
 {
 	int	i;
-	
+
 	i = 0;
 	while (i <= 8)
 	{
@@ -29,7 +29,7 @@ int		cx(int grid[9][9], int x, int y)
 int		cy(int grid[9][9], int x, int y)
 {
 	int k;
-	
+
 	k = 0;
 	while (k <= 8)
 	{
@@ -40,15 +40,6 @@ int		cy(int grid[9][9], int x, int y)
 	return (1);
 }
 
-int		blockindex(int i)
-{
-	if (i <= 2)
-		return (0);
-	if (i <= 5)
-		return (3);
-	return (6);
-}
-
 int		cblock(int grid[9][9], int x, int y)
 {
 	int ix;
@@ -56,8 +47,8 @@ int		cblock(int grid[9][9], int x, int y)
 	int	kx;
 	int	ky;
 
-	ix = blockindex(x);
-	iy = blockindex(y);
+	ix = x / 3 * 3;
+	iy = y / 3 * 3;
 	kx = 0;
 	while (kx <= 2)
 	{

@@ -12,7 +12,7 @@
 
 #include "./sudoku.h"
 
-void	popgrid(int grid[9][9], char **in)
+int		popgrid(int grid[9][9], char **in)
 {
 	int	i;
 	int	k;
@@ -25,13 +25,23 @@ void	popgrid(int grid[9][9], char **in)
 			grid[i][k] = (ft_isdigit(in[i][k])) ? in[i][k] - '0' : 0;
 		i++;
 	}
+	i = 0;
+	while (i <= 8)
+	{
+		k = -1;
+		while (++k <= 8)
+			if (grid[i][k] && !check(grid, i, k))
+				return (0);
+		i++;
+	}
+	return (1);
 }
 
 int		validin(int argc, char **argv)
 {
 	int i;
 	int j;
-	
+
 	if (argc != 10)
 		return (0);
 	i = 0;
@@ -51,7 +61,7 @@ int		validin(int argc, char **argv)
 	return (1);
 }
 
-void	putgrid(int grid[9][9])
+int		putgrid(int grid[9][9])
 {
 	int	i;
 	int	k;
@@ -69,6 +79,7 @@ void	putgrid(int grid[9][9])
 		ft_putchar('\n');
 		i++;
 	}
+	return (1);
 }
 
 void	brute(int grid[9][9], int x, int y)
@@ -79,34 +90,25 @@ void	brute(int grid[9][9], int x, int y)
 			if(check(grid, x, y))
 			{
 				if ((x == 8) && (y == 8))
-				{
-					putgrid(grid);
-					exit(1);
-				}
+					exit(putgrid(grid));
 				else
-					brute(grid, (x == 8) ? 0 : x + 1, (x == 8) ? y + 1 : y);
+					(x == 8) ? brute(grid, 0, y + 1) : brute(grid, x + 1, y);
 			}
 		grid[x][y] = 0;
 	}
+	else if ((x == 8) && (y == 8))
+		exit(putgrid(grid));
 	else
-	{
-		if ((x == 8) && (y == 8))
-		{
-			putgrid(grid);
-			exit(1);
-		}
-		brute(grid, (x == 8) ? 0 : x + 1, (x == 8) ? y + 1 : y);
-	}
+		(x == 8) ? brute(grid, 0, y + 1) : brute(grid, x + 1, y);
 	return ;
 }
 
 int		main(int argc, char **argv)
 {
 	int	grid[9][9];
-	
-	if (!validin(argc, ++argv))
+
+	if (!validin(argc, ++argv) || !popgrid(grid, argv))
 		erexit("error invalid input");
-	popgrid(grid, argv);
 	brute(grid, 0, 0);
 	erexit("invalid grid");
 	return (0);
