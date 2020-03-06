@@ -65,21 +65,16 @@ int		putgrid(int grid[9][9])
 {
 	int	i;
 	int	k;
-
-	ft_putstr("\e[1;1H\e[2J");		
+	
+	ft_putstr("\e[1;1H\e[2J╔═══════╦═══════╦═══════╗\n");
 	i = 0;
-	ft_putstr("╔═══════╦═══════╦═══════╗\n");
 	while (i <= 8)
 	{
 		k = 0;
 		ft_putstr("║ ");
 		while (k <= 8)
 		{
-			if (grid[i][k])
-				ft_putnbr(grid[i][k]);
-			else
-				ft_putchar(' ');
-			
+			(grid[i][k]) ? ft_putnbr(grid[i][k]) : ft_putchar(' ');
 			ft_putchar(' ');
 			if ((k == 2) || (k == 5))
 				ft_putstr("║ ");
@@ -91,8 +86,7 @@ int		putgrid(int grid[9][9])
 		i++;
 	}
 	ft_putstr("╚═══════╩═══════╩═══════╝\n");
-	usleep(1000);
-	return (1);
+	return (usleep(1000));
 }
 
 int		brute(int grid[9][9], int x, int y)
