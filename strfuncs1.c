@@ -25,7 +25,7 @@ int	ft_isdigit(int c)
 
 void	ft_putendl(char const *s)
 {
-	ft_putstr((char *)s);
+	ft_putstr(s);
 	ft_putchar('\n');
 }
 
