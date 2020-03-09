@@ -65,7 +65,7 @@ int		putgrid(int grid[9][9])
 {
 	int	i;
 	int	k;
-	
+
 	ft_putstr("\e[1;1H\e[2J╔═══════╦═══════╦═══════╗\n");
 	i = 0;
 	while (i <= 8)
