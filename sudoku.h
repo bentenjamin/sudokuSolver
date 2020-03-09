@@ -22,9 +22,6 @@
 void	ft_putstr(char const *str);
 int		ft_isdigit(int c);
 void	ft_putendl(char const *s);
-void	erexit(char *error);
-void	ft_putnbr(int n);
-int		ft_abs(int i);
 void	ft_putchar(char in);
 int		check(int grid[9][9], int x, int y);
 

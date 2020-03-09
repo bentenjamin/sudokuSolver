@@ -74,7 +74,7 @@ int		putgrid(int grid[9][9])
 		ft_putstr("║ ");
 		while (k <= 8)
 		{
-			(grid[i][k]) ? ft_putnbr(grid[i][k]) : ft_putchar(' ');
+			(grid[i][k]) ? ft_putchar(grid[i][k] + '0') : ft_putchar(' ');
 			ft_putchar(' ');
 			if ((k == 2) || (k == 5))
 				ft_putstr("║ ");
@@ -106,9 +106,9 @@ int		main(int argc, char **argv)
 {
 	int	grid[9][9];
 
-	if (!validin(argc, ++argv))
-		erexit("error invalid input");
-	if (!popgrid(grid, argv) || !brute(grid, 0, 0))
-		erexit("invalid grid");
-	return (putgrid(grid));
+	if (validin(argc, ++argv) && popgrid(grid, argv) && brute(grid, 0, 0))
+		putgrid(grid);
+	else
+		ft_putendl("Error");
+	return (1);
 }

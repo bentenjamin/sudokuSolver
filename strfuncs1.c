@@ -12,6 +12,11 @@
 
 #include "./sudoku.h"
 
+void	ft_putchar(char in)
+{
+	write(1, &in, 1);
+}
+
 void	ft_putstr(char const *str)
 {
 	while (str[0] && write(1, str++, 1))
@@ -27,10 +32,4 @@ void	ft_putendl(char const *s)
 {
 	ft_putstr(s);
 	ft_putchar('\n');
-}
-
-void	erexit(char *error)
-{
-	ft_putendl(error);
-	exit(1);
 }
