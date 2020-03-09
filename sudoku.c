@@ -65,28 +65,21 @@ int		putgrid(int grid[9][9])
 {
 	int	i;
 	int	k;
-	
-	ft_putstr("\e[1;1H\e[2J╔═══════╦═══════╦═══════╗\n");
+
 	i = 0;
 	while (i <= 8)
 	{
 		k = 0;
-		ft_putstr("║ ");
 		while (k <= 8)
 		{
-			(grid[i][k]) ? ft_putchar(grid[i][k] + '0') : ft_putchar(' ');
-			ft_putchar(' ');
-			if ((k == 2) || (k == 5))
-				ft_putstr("║ ");
+			ft_putchar(grid[i][k] + '0');
+			if (k != 8)
+				ft_putchar(' ');
 			k++;
 		}
-		ft_putstr("║\n");
-		if ((i == 2) || (i == 5))
-			ft_putstr("╠═══════╬═══════╬═══════╣\n");
+		ft_putstr("\n");
 		i++;
 	}
-	ft_putstr("╚═══════╩═══════╩═══════╝\n");
-	return (usleep(1000));
 }
 
 int		brute(int grid[9][9], int x, int y)
@@ -94,11 +87,8 @@ int		brute(int grid[9][9], int x, int y)
 	if (grid[x][y])
 		return ((x == 8) ? ((y == 8) ? 1 : brute(grid, 0, y + 1)) : brute(grid, x + 1, y));
 	while ((++(grid[x][y])) <= 9)
-	{
-		putgrid(grid);
 		if(check(grid, x, y) && (((x == 8) && (y == 8)) || (brute(grid, x + ((x == 8) ? -x : 1), y + ((x == 8) ? 1 : 0)))))
 			return (1);
-	}
 	return (grid[x][y] = 0);
 }
 
