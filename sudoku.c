@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   sudoku.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bwebb <bwebb@student.42.fr>                +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/18 12:28:54 by bwebb             #+#    #+#             */
-/*   Updated: 2020/01/18 15:17:49 by bwebb            ###   ########.fr       */
+/*   Updated: 2020/03/12 08:51:31 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,10 +84,12 @@ int		putgrid(int grid[9][9])
 
 int		brute(int grid[9][9], int x, int y)
 {
+	y += (x == 9) ? 1 : 0;
+	x = (x == 9) ? 0 : x;
 	if (grid[x][y])
-		return ((x == 8) ? ((y == 8) ? 1 : brute(grid, 0, y + 1)) : brute(grid, x + 1, y));
+		return (((y == 8) && (x == 8)) ? 1 : brute(grid, x + 1, y + 1));
 	while ((++(grid[x][y])) <= 9)
-		if(check(grid, x, y) && (((x == 8) && (y == 8)) || (brute(grid, x + ((x == 8) ? -x : 1), y + ((x == 8) ? 1 : 0)))))
+		if(check(grid, x, y) && (((x == 8) && (y == 8)) || (brute(grid, x + 1, y))))
 			return (1);
 	return (grid[x][y] = 0);
 }
