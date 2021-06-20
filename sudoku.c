@@ -89,16 +89,29 @@ int		putgrid(int grid[9][9])
 	return (usleep(1000));
 }
 
-int		brute(int grid[9][9], int x, int y)
-{
-	if (grid[x][y])
-		return ((x == 8) ? ((y == 8) ? 1 : brute(grid, 0, y + 1)) : brute(grid, x + 1, y));
-	while ((++(grid[x][y])) <= 9)
-	{
-		putgrid(grid);
-		if(check(grid, x, y) && (((x == 8) && (y == 8)) || (brute(grid, x + ((x == 8) ? -x : 1), y + ((x == 8) ? 1 : 0)))))
+int 	algo(int grid[9][9], int x, int y);
+
+int		next_cell(int grid[9][9], int x, int y) {
+	if (x == 8) {
+		if (y == 8)
 			return (1);
+		return (algo(grid, 0, y + 1));
 	}
+	return (algo(grid, x + 1, y));
+}
+
+int 	algo(int grid[9][9], int x, int y) {
+	if (grid[x][y] != 0)
+		return (next_cell(grid, x, y));
+
+	while (grid[x][y] < 9) {
+		grid[x][y]++;
+
+		if (check(grid, x, y))
+			if (next_cell(grid, x, y))
+				return (1);
+	}
+	
 	return (grid[x][y] = 0);
 }
 
@@ -106,7 +119,7 @@ int		main(int argc, char **argv)
 {
 	int	grid[9][9];
 
-	if (validin(argc, ++argv) && popgrid(grid, argv) && brute(grid, 0, 0))
+	if (validin(argc, ++argv) && popgrid(grid, argv) && algo(grid, 0, 0))
 		putgrid(grid);
 	else
 		ft_putendl("Error");
